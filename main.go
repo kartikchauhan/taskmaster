@@ -13,9 +13,10 @@ var (
 )
 
 func main() {
-	add := flag.Bool("add", false, "add a new todo")
+	add := flag.String("add", "", "add a new todo")
 	complete := flag.Int("complete", 0, "mark a todo as completed")
 	delete := flag.Int("delete", 0, "delete a todo")
+	list := flag.Bool("list", false, "list all todos")
 
 	flag.Parse()
 
@@ -27,8 +28,8 @@ func main() {
 	}
 
 	switch {
-	case *add:
-		todos.Add("sample todo")
+	case len(*add) != 0:
+		todos.Add("first todo")
 		err := todos.Save(filename)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err.Error())
@@ -48,6 +49,8 @@ func main() {
 			fmt.Fprintln(os.Stderr, err.Error())
 			os.Exit(1)
 		}
+	case *list:
+		todos.Print()
 	default:
 		fmt.Fprintln(os.Stderr, "Invalid option")
 	}
