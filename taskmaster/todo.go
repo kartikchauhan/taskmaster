@@ -32,6 +32,8 @@ func (t *Todos) Complete(id int) {
 
 	todo.Completed = true
 	todo.CompletedAt = time.Now()
+
+	(*t)[id-1] = todo
 }
 
 func (t *Todos) Delete(id int) {
