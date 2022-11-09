@@ -3,6 +3,7 @@ package taskmaster
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"os"
 	"time"
 )
@@ -77,4 +78,10 @@ func (t *Todos) Save(filename string) error {
 	}
 
 	return os.WriteFile(filename, data, 0644)
+}
+
+func (t *Todos) Print() {
+	for i, item := range *t {
+		fmt.Printf("%v. %v\n", i+1, item.Task)
+	}
 }
