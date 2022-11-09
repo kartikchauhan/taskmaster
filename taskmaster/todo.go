@@ -27,13 +27,11 @@ func (t *Todos) Add(task string) {
 	*t = append(*t, todo)
 }
 
-func (t *Todos) Complete(id int) error {
+func (t *Todos) Complete(id int) {
 	todo := t.GetItem(id)
 
 	todo.Completed = true
 	todo.CompletedAt = time.Now()
-
-	return nil
 }
 
 func (t *Todos) Delete(id int) {
