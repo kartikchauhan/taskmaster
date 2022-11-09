@@ -28,7 +28,7 @@ func main() {
 
 	switch {
 	case *add:
-		todos.Add("make an app")
+		todos.Add("sample todo")
 		err := todos.Save(filename)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err.Error())
@@ -36,6 +36,11 @@ func main() {
 		}
 	case *complete > 0:
 		todos.Complete(*complete)
+		err := todos.Save(filename)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err.Error())
+			os.Exit(1)
+		}
 	case *delete > 0:
 		todos.Delete(*delete)
 		err := todos.Save(filename)
